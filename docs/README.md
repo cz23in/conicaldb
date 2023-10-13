@@ -30,7 +30,7 @@ Does not exist yet. Likely to exist once project exists.
 
 A collection of historical documents starting with the most recent:
 
-- **11/Oct/2023** - [Inital Planning Document](https://github.com/cz23in/conicaldb/docs/planning/11_Oct_2023_Initial_Planning_Document.md)
+- **11/Oct/2023** - [Inital Planning Document](https://github.com/cz23in/conicaldb/blob/master/docs/planning/11_Oct_2023_Initial_Planning_Document.md)
 
 ## Release Checklists
 
