@@ -1,9 +1,5 @@
 # Initial Planning Document
 
-| Date | Author | Change |
-|---|---|---|
-| 12/Oct/2023 | cz23in | Created document |
-
 ## Objective
 
 The project will have the following inital objectives:
