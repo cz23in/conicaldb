@@ -42,8 +42,4 @@ This is currently a personal project however, this project will be developed so 
 
 Dates in the documentation should be in the form: 01/Jan/2020. This is to prevent confusion between American and non-American formats.
 
-All documentation will contain a history section with the following format:
 
-| Date | Author | Change |
-|---|---|---|
-| 01/Jan/2000 | johndoe | Created document |
