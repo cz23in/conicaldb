@@ -10,10 +10,10 @@ The project will have the following inital objectives:
 
 Distributed systems are not easy, and choosing a good storage mechanism for the data will ensure fast access. So, some experiments will be done before active development starts:
 
-- Try setup 3 servers and have a master-election process together with a re-election should one of the nodes come offline.
-- Try setup 3 servers and have a record sent to a server. Then, on command, kill one of the servers. The data should still exist and should still be queryable.
-- Try setup 3 servers and have a node-joining process.
-- Write a file format which accepts a basic schema and contains a number of rows. This should have CRUD functionality.
+- (Experiment_1) Try setup 3 servers and have a master-election process together with a re-election should one of the nodes come offline.
+- (Experiment_2) Try setup 3 servers and have a record sent to a server. Then, on command, kill one of the servers. The data should still exist and should still be queryable.
+- (Experiment_3) Try setup 3 servers and have a node-joining process.
+- (Experiment_4) Write a file format which accepts a basic schema and contains a number of rows. This should have CRUD functionality.
 
 ## Initial Timeline
 
