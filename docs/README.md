@@ -10,7 +10,8 @@ The project has three binaries/libraries:
 **Server Modules:**
 | Module Name | Small Description |
 |---|---|
-| Modules to be contined | Nothign here let |
+| error | Basic error utilties |
+| configuration | Gets environment context from configuration file. |
 
 **Client Modules:**
 | Module Name | Small Description |
