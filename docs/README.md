@@ -10,7 +10,8 @@ The project has three binaries/libraries:
 **Server Modules:**
 | Module Name | Small Description |
 |---|---|
-| error | Basic error utilties |
+| error | Basic error utilties|
+| sql | SQL parsing |
 | configuration | Gets environment context from configuration file. |
 
 **Client Modules:**

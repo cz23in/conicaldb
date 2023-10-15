@@ -1,4 +1,5 @@
 mod conical_error;
+mod sql;
 mod configuration;
 
 use crate::configuration::Configuration;
