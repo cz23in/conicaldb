@@ -12,7 +12,9 @@ The project has three binaries/libraries:
 |---|---|
 | error | Basic error utilties|
 | sql | SQL parsing |
-| configuration | Gets environment context from configuration file. |
+| logger | Self explaining |
+| configuration | Gets environment context from configuration file.|
+| server | Handels all networking and protocol management. See README for more |
 
 **Client Modules:**
 | Module Name | Small Description |
