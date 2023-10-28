@@ -56,7 +56,7 @@ impl Connection {
 			to_send_size = PACKET_SIZE;
 		}
 		
-		let packet = self.outgoing_buffer.drop_left(to_send_size);
+		let packet = self.outgoing_buffer.drop_left(to_send_size).unwrap();
 		self.tcp_stream.write_all(packet.as_slice()).expect("Could not write.");
 	}
 	

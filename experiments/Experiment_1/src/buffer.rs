@@ -13,25 +13,35 @@ impl Buffer {
 		}
 	}
 
-	pub fn drop_left(&mut self, n: usize) -> Vec<u8> {
-		let mut result = Vec::<u8>::new();
-		for i in n..self.data.len() {
-			result.push(self.data[i-n]);
-			self.data[i - n] = self.data[i];
+	pub fn drop_left(&mut self, n: usize) -> Option<Vec<u8>> {
+		if n >= self.len() || n < 1 {
+			return None
+		}
+
+		let mut saved_dropped = Vec::<u8>::new();
+		for i in 0..n {
+			saved_dropped.push(self.data[i]);
+			if i + n < MAX_BUFFER_SIZE {
+				self.data[i] = self.data[i + n];
+			}
 		}
 		self.index -= n;
-		result
+
+		Some(saved_dropped)
 	}
 
-	pub fn push_string(&mut self, target: String) {
+	pub fn push_string(&mut self, target: String) -> bool {
+		if (target.len() + self.index > MAX_BUFFER_SIZE) {
+			return false;
+		}
+
 		let characters = target.as_bytes();
 		for i in 0..characters.len() {
-			if self.index == self.data.len() {
-				break;
-			}
 			self.data[self.index] = characters[i];
 			self.index += 1;
 		}
+
+		true
 	}
 
 	pub fn len(&mut self) -> usize {
@@ -43,25 +53,49 @@ impl Buffer {
 mod tests {
 	use super::*;
 
-	fn buffer_to_text(buffer: &Buffer) -> String {
-		let data_buffer: Vec<u8> = buffer.data[0..buffer.index].to_vec();
-		let result = std::str::from_utf8(&data_buffer).expect("Could not extract data from buffer.");
-		String::from(result)
+	fn buffer_to_text(buffer: &mut Buffer) -> String {
+		let mut result = String::new();
+		for i in 0..buffer.len() {
+			result.push(buffer.data[i] as char);
+		}
+		result
+
 	}
 
 	#[test]
-	fn buffer_test_1() {
+	fn buffer_test_initialization() {
 		let mut buffer = Buffer::new();
-		assert_eq!(buffer_to_text(&buffer), String::from(""));
+		assert_eq!(buffer_to_text(&mut buffer), String::new());
+	}
 
+	#[test]
+	fn buffer_test_push_simple() {
+		let mut buffer = Buffer::new();
+		let result = buffer.push_string(String::from("12345"));
+		assert_eq!(result, true);
+		assert_eq!(buffer_to_text(&mut buffer), String::from("12345"));
+	}
+
+	#[test]
+	fn buffer_test_full() {
+		let mut buffer = Buffer::new();
+		let mut example_str = String::from("This is some example string.");
+		buffer.push_string(example_str.clone());
+		let mut bigger_string = String::new();
+		for i in 0..MAX_BUFFER_SIZE {
+			bigger_string.push('A');
+		}
+		let result = buffer.push_string(bigger_string);
+		assert_eq!(result, false);
+		assert_eq!(buffer_to_text(&mut buffer), example_str);
+	}
+
+	#[test]
+	fn buffer_test_drop_more_than_has() {
+		let mut buffer = Buffer::new();
 		buffer.push_string(String::from("12345"));
-		assert_eq!(buffer_to_text(&buffer), String::from("12345"));
-
-		let drop_lefted = buffer.drop_left(3);
-		let compare_str: &str = "123";
-		let compare_vec: Vec<u8> = compare_str.as_bytes().to_vec();
-		assert_eq!(drop_lefted, compare_vec);
-
-		assert_eq!(buffer_to_text(&buffer), String::from("123"));
+		let result = buffer.drop_left(6);
+		assert_eq!(result.is_some(), false);
+		assert_eq!(buffer_to_text(&mut buffer), String::from("12345"));
 	}
 }
